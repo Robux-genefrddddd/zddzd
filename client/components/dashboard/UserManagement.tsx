@@ -1,5 +1,6 @@
 import { Plus, Trash2 } from "lucide-react";
 import { useState } from "react";
+import { getThemeColors } from "@/lib/theme-colors";
 
 interface User {
   id: string;
@@ -23,6 +24,7 @@ export function UserManagement({
   onDeleteUser,
   onUpdateUserRole,
 }: UserManagementProps) {
+  const colors = getThemeColors(theme);
   const [newUserName, setNewUserName] = useState("");
   const [newUserEmail, setNewUserEmail] = useState("");
   const [newUserRole, setNewUserRole] = useState<"admin" | "user">("user");
@@ -44,13 +46,13 @@ export function UserManagement({
       <div
         className="rounded-lg border p-6"
         style={{
-          backgroundColor: theme === "dark" ? "#111214" : "#F9FAFB",
-          borderColor: theme === "dark" ? "#1F2124" : "#E5E7EB",
+          backgroundColor: colors.card,
+          borderColor: colors.border,
         }}
       >
         <h3
           className="text-lg font-bold mb-4"
-          style={{ color: theme === "dark" ? "#FFFFFF" : "#111827" }}
+          style={{ color: colors.text }}
         >
           Add New User
         </h3>
@@ -112,8 +114,8 @@ export function UserManagement({
             onClick={handleSubmit}
             className="px-4 py-2 rounded-lg font-medium flex items-center justify-center gap-2 transition-opacity hover:opacity-80"
             style={{
-              backgroundColor: theme === "dark" ? "#1A2647" : "#DBEAFE",
-              color: theme === "dark" ? "#60A5FA" : "#1E40AF",
+              backgroundColor: colors.accentLight,
+              color: colors.primary,
             }}
           >
             <Plus className="w-4 h-4" />
@@ -126,19 +128,19 @@ export function UserManagement({
       <div
         className="rounded-lg border overflow-hidden"
         style={{
-          backgroundColor: theme === "dark" ? "#111214" : "#FFFFFF",
-          borderColor: theme === "dark" ? "#1F2124" : "#E5E7EB",
+          backgroundColor: colors.card,
+          borderColor: colors.border,
         }}
       >
         <div
           className="px-6 py-4 border-b"
           style={{
-            borderColor: theme === "dark" ? "#1F2124" : "#E5E7EB",
+            borderColor: colors.border,
           }}
         >
           <h2
             className="text-xl font-bold"
-            style={{ color: theme === "dark" ? "#FFFFFF" : "#111827" }}
+            style={{ color: colors.text }}
           >
             Team Members {users.length > 0 && `(${users.length})`}
           </h2>
@@ -147,14 +149,14 @@ export function UserManagement({
         <div
           className="divide-y"
           style={{
-            borderColor: theme === "dark" ? "#1F2124" : "#E5E7EB",
+            borderColor: colors.border,
           }}
         >
           {users.length === 0 ? (
             <div className="px-6 py-8 text-center">
               <p
                 style={{
-                  color: theme === "dark" ? "#9CA3AF" : "#6B7280",
+                  color: colors.textSecondary,
                 }}
               >
                 No team members yet. Add one to get started!
@@ -164,25 +166,25 @@ export function UserManagement({
             users.map((user) => (
               <div
                 key={user.id}
-                className="px-6 py-4 flex items-center justify-between hover:opacity-75 transition-opacity"
-                style={{
-                  backgroundColor: theme === "dark" ? "transparent" : "#F9FAFB",
-                }}
-              >
-                <div className="flex-1">
-                  <p
-                    className="font-medium"
-                    style={{
-                      color: theme === "dark" ? "#FFFFFF" : "#111827",
-                    }}
-                  >
-                    {user.name}
-                  </p>
-                  <p
-                    className="text-sm"
-                    style={{
-                      color: theme === "dark" ? "#9CA3AF" : "#6B7280",
-                    }}
+              className="px-6 py-4 flex items-center justify-between hover:opacity-75 transition-opacity"
+              style={{
+                backgroundColor: colors.card,
+              }}
+            >
+              <div className="flex-1">
+                <p
+                  className="font-medium"
+                  style={{
+                    color: colors.text,
+                  }}
+                >
+                  {user.name}
+                </p>
+                <p
+                  className="text-sm"
+                  style={{
+                    color: colors.textSecondary,
+                  }}
                   >
                     {user.email}
                   </p>
