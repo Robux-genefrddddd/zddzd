@@ -1,230 +1,249 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Zap, Shield, Sparkles } from "lucide-react";
+import { ArrowRight, Menu, X } from "lucide-react";
+import { useState } from "react";
 
 export default function Index() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white via-white to-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 relative overflow-hidden">
+      {/* Animated gradient sphere background */}
+      <div className="absolute top-1/2 right-0 w-96 h-96 bg-gradient-to-br from-cyan-400 via-blue-300 to-orange-200 rounded-full blur-3xl opacity-30 animate-pulse -mr-48"></div>
+      <div className="absolute bottom-0 left-1/4 w-72 h-72 bg-gradient-to-t from-cyan-400 to-transparent rounded-full blur-3xl opacity-20 animate-pulse" style={{ animationDelay: "1s" }}></div>
+
       {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-white/80 backdrop-blur-md border-b border-gray-200 z-50">
-        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-          <div className="font-bold text-xl text-gray-900">Studio</div>
-          <div className="flex items-center gap-8">
-            <a href="#features" className="text-gray-600 hover:text-gray-900 transition">
+      <nav className="fixed top-0 w-full z-50 px-6 py-4">
+        <div className="max-w-7xl mx-auto flex items-center justify-between">
+          <Link to="/" className="text-2xl font-bold text-white">
+            Studio
+          </Link>
+
+          {/* Mobile menu button */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="md:hidden text-white"
+          >
+            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+
+          {/* Desktop menu */}
+          <div className="hidden md:flex items-center gap-8">
+            <a
+              href="#"
+              className="text-white/80 hover:text-white transition"
+            >
               Features
+            </a>
+            <a
+              href="#"
+              className="text-white/80 hover:text-white transition"
+            >
+              Pricing
             </a>
             <Link
               to="/dashboard"
-              className="text-gray-600 hover:text-gray-900 transition"
+              className="text-white/80 hover:text-white transition"
+            >
+              Docs
+            </Link>
+          </div>
+
+          <div className="hidden md:flex items-center gap-4">
+            <Link
+              to="/login"
+              className="text-white/80 hover:text-white font-medium transition"
+            >
+              Sign In
+            </Link>
+            <Link
+              to="/register"
+              className="bg-cyan-400 text-blue-900 px-6 py-2 rounded-lg hover:bg-cyan-300 font-medium transition"
+            >
+              Get Started
+            </Link>
+          </div>
+        </div>
+
+        {/* Mobile menu */}
+        {mobileMenuOpen && (
+          <div className="md:hidden absolute top-16 left-0 right-0 bg-blue-900/95 backdrop-blur p-6 space-y-4">
+            <a
+              href="#"
+              className="block text-white/80 hover:text-white transition"
+            >
+              Features
+            </a>
+            <a
+              href="#"
+              className="block text-white/80 hover:text-white transition"
             >
               Pricing
-            </Link>
-            <a href="#" className="text-gray-600 hover:text-gray-900 transition">
-              Docs
             </a>
-            <div className="flex items-center gap-3">
+            <Link
+              to="/dashboard"
+              className="block text-white/80 hover:text-white transition"
+            >
+              Docs
+            </Link>
+            <div className="pt-4 space-y-3 border-t border-white/20">
               <Link
                 to="/login"
-                className="text-gray-700 hover:text-gray-900 font-medium transition"
+                className="block text-white/80 hover:text-white font-medium transition"
               >
                 Sign In
               </Link>
               <Link
                 to="/register"
-                className="bg-primary text-primary-foreground px-5 py-2 rounded-lg hover:bg-blue-600 font-medium transition"
+                className="block bg-cyan-400 text-blue-900 px-6 py-2 rounded-lg hover:bg-cyan-300 font-medium transition text-center"
               >
                 Get Started
               </Link>
             </div>
           </div>
-        </div>
+        )}
       </nav>
 
-      {/* Hero Section */}
-      <section className="pt-32 pb-24 px-6">
-        <div className="max-w-4xl mx-auto text-center space-y-8">
-          <div className="space-y-4">
-            <h1 className="text-5xl md:text-6xl font-bold text-gray-900 leading-tight">
-              Build amazing things,{" "}
-              <span className="bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
-                effortlessly
-              </span>
-            </h1>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+      {/* Main Content */}
+      <div className="min-h-screen flex items-center justify-center px-6 pt-20">
+        <div className="grid lg:grid-cols-2 gap-12 items-center max-w-6xl w-full">
+          {/* Left side - Card */}
+          <div className="relative z-10">
+            <div className="bg-white rounded-3xl p-8 md:p-12 shadow-2xl max-w-md mx-auto lg:mx-0">
+              {/* Logo */}
+              <div className="flex items-center gap-3 mb-8">
+                <div className="w-10 h-10 bg-blue-900 rounded-lg flex items-center justify-center">
+                  <span className="text-white font-bold">S</span>
+                </div>
+                <span className="font-bold text-gray-900">Studio</span>
+              </div>
+
+              {/* Welcome text */}
+              <h2 className="text-3xl font-bold text-gray-900 mb-2">Welcome</h2>
+              <p className="text-gray-600 mb-8 text-sm">
+                Build amazing things effortlessly
+              </p>
+
+              {/* User avatar */}
+              <div className="flex justify-center mb-8">
+                <div className="w-16 h-16 bg-gradient-to-br from-blue-900 to-blue-700 rounded-full flex items-center justify-center text-white text-2xl font-bold">
+                  👤
+                </div>
+              </div>
+
+              {/* Form fields */}
+              <div className="space-y-4 mb-8">
+                <div>
+                  <input
+                    type="text"
+                    placeholder="USERNAME"
+                    className="w-full px-4 py-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-900"
+                  />
+                </div>
+                <div>
+                  <input
+                    type="password"
+                    placeholder="PASSWORD"
+                    className="w-full px-4 py-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-900"
+                  />
+                </div>
+              </div>
+
+              {/* Login button */}
+              <Link
+                to="/dashboard"
+                className="w-full bg-blue-900 text-white py-3 rounded-lg font-bold hover:bg-blue-800 transition flex items-center justify-center gap-2 mb-6 group"
+              >
+                LOGIN
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition" />
+              </Link>
+
+              {/* Footer links */}
+              <div className="flex items-center justify-between text-xs text-gray-500">
+                <Link to="/register" className="hover:text-gray-700">
+                  Sign up
+                </Link>
+                <a href="#" className="hover:text-gray-700">
+                  Forgot password?
+                </a>
+              </div>
+
+              {/* Dots indicator */}
+              <div className="flex justify-center gap-2 mt-8 pt-8 border-t border-gray-100">
+                <div className="w-2 h-2 bg-blue-900 rounded-full"></div>
+                <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
+                <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right side - Welcome text and gradient */}
+          <div className="relative z-10 text-center lg:text-left">
+            {/* Large gradient sphere effect */}
+            <div className="relative h-96 flex items-center justify-center mb-8">
+              <div className="absolute inset-0 bg-gradient-to-br from-cyan-400 via-blue-300 to-orange-200 rounded-full blur-2xl opacity-50"></div>
+              <div className="relative text-white">
+                <h1 className="text-5xl md:text-6xl font-bold mb-4">
+                  Welcome.
+                </h1>
+              </div>
+            </div>
+
+            <p className="text-white/80 text-lg max-w-md mx-auto lg:mx-0 leading-relaxed">
               A modern platform designed to help teams collaborate, create, and
               ship faster. Intuitive, powerful, and built for everyone.
             </p>
-          </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
-            <Link
-              to="/register"
-              className="bg-primary text-primary-foreground px-8 py-3 rounded-lg hover:bg-blue-600 font-medium transition flex items-center justify-center gap-2 group"
-            >
-              Start Building
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition" />
-            </Link>
-            <button className="bg-gray-100 text-gray-900 px-8 py-3 rounded-lg hover:bg-gray-200 font-medium transition">
-              Watch Demo
-            </button>
-          </div>
-
-          {/* Stats */}
-          <div className="grid grid-cols-3 gap-8 pt-16 border-t border-gray-200">
-            <div className="space-y-2">
-              <div className="text-3xl font-bold text-gray-900">10M+</div>
-              <p className="text-gray-600">Active Users</p>
-            </div>
-            <div className="space-y-2">
-              <div className="text-3xl font-bold text-gray-900">99.9%</div>
-              <p className="text-gray-600">Uptime</p>
-            </div>
-            <div className="space-y-2">
-              <div className="text-3xl font-bold text-gray-900">150+</div>
-              <p className="text-gray-600">Countries</p>
+            <div className="mt-8">
+              <Link
+                to="/register"
+                className="inline-block bg-cyan-400 text-blue-900 px-8 py-3 rounded-lg hover:bg-cyan-300 font-bold transition"
+              >
+                Start Now
+              </Link>
             </div>
           </div>
         </div>
-      </section>
+      </div>
 
-      {/* Features Section */}
-      <section id="features" className="py-24 px-6 bg-white">
+      {/* Bottom section - Features */}
+      <div className="relative z-10 px-6 py-20 bg-gradient-to-t from-blue-900/50 to-transparent">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center space-y-4 mb-16">
-            <h2 className="text-4xl font-bold text-gray-900">
-              Everything you need
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Powerful features designed with simplicity in mind
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
+          <h2 className="text-3xl font-bold text-white text-center mb-12">
+            Everything you need
+          </h2>
+          <div className="grid md:grid-cols-3 gap-6">
             {[
               {
-                icon: Zap,
                 title: "Lightning Fast",
                 description:
                   "Experience blazing-fast performance with our optimized infrastructure.",
               },
               {
-                icon: Shield,
                 title: "Secure & Reliable",
                 description:
                   "Enterprise-grade security to keep your data safe and protected.",
               },
               {
-                icon: Sparkles,
                 title: "Intuitive Design",
                 description:
                   "Beautiful, user-friendly interface that everyone loves to use.",
               },
             ].map((feature, i) => (
-              <div
-                key={i}
-                className="p-8 rounded-xl border border-gray-200 hover:border-gray-300 hover:shadow-lg transition space-y-4 bg-white"
-              >
-                <feature.icon className="w-8 h-8 text-primary" />
-                <h3 className="text-xl font-semibold text-gray-900">
+              <div key={i} className="bg-white/10 backdrop-blur border border-white/20 rounded-2xl p-6 hover:bg-white/15 transition">
+                <h3 className="text-xl font-bold text-white mb-2">
                   {feature.title}
                 </h3>
-                <p className="text-gray-600">{feature.description}</p>
+                <p className="text-white/70">{feature.description}</p>
               </div>
             ))}
           </div>
         </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-24 px-6">
-        <div className="max-w-4xl mx-auto bg-gradient-to-r from-blue-600 to-blue-500 rounded-2xl p-12 text-center text-white space-y-6">
-          <h2 className="text-4xl font-bold">Ready to get started?</h2>
-          <p className="text-lg text-blue-100">
-            Join thousands of teams already using our platform
-          </p>
-          <Link
-            to="/register"
-            className="inline-block bg-white text-blue-600 px-8 py-3 rounded-lg hover:bg-gray-50 font-medium transition"
-          >
-            Create Free Account
-          </Link>
-        </div>
-      </section>
+      </div>
 
       {/* Footer */}
-      <footer className="border-t border-gray-200 py-12 px-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-4 gap-8 mb-8">
-            <div>
-              <div className="font-bold text-lg text-gray-900 mb-4">Studio</div>
-              <p className="text-gray-600 text-sm">
-                Build amazing things, effortlessly.
-              </p>
-            </div>
-            <div className="space-y-3">
-              <h4 className="font-semibold text-gray-900">Product</h4>
-              <ul className="space-y-2 text-sm text-gray-600">
-                <li>
-                  <a href="#" className="hover:text-gray-900 transition">
-                    Features
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-gray-900 transition">
-                    Pricing
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-gray-900 transition">
-                    Security
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div className="space-y-3">
-              <h4 className="font-semibold text-gray-900">Company</h4>
-              <ul className="space-y-2 text-sm text-gray-600">
-                <li>
-                  <a href="#" className="hover:text-gray-900 transition">
-                    About
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-gray-900 transition">
-                    Blog
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-gray-900 transition">
-                    Careers
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div className="space-y-3">
-              <h4 className="font-semibold text-gray-900">Legal</h4>
-              <ul className="space-y-2 text-sm text-gray-600">
-                <li>
-                  <a href="#" className="hover:text-gray-900 transition">
-                    Privacy
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-gray-900 transition">
-                    Terms
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-gray-900 transition">
-                    Contact
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="border-t border-gray-200 pt-8 text-center text-sm text-gray-600">
-            <p>&copy; 2024 Studio. All rights reserved.</p>
-          </div>
+      <footer className="relative z-10 border-t border-white/10 py-8 px-6">
+        <div className="max-w-6xl mx-auto text-center text-white/60 text-sm">
+          <p>&copy; 2024 Studio. All rights reserved.</p>
         </div>
       </footer>
     </div>
