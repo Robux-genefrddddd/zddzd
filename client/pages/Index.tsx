@@ -108,10 +108,12 @@ export default function Index() {
             <div className="bg-white rounded-3xl p-8 md:p-12 shadow-2xl max-w-md mx-auto lg:mx-0">
               {/* Logo */}
               <div className="flex items-center gap-3 mb-8">
-                <div className="w-10 h-10 bg-blue-900 rounded-lg flex items-center justify-center">
-                  <span className="text-white font-bold">S</span>
-                </div>
-                <span className="font-bold text-gray-900">Studio</span>
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets%2F91e2732f1c03487e879c66ee97e72712%2F34cbcd9ce9c34f589a07ada075ea2335?format=webp&width=800"
+                  alt="PinPinCloud"
+                  className="w-10 h-10 object-contain"
+                />
+                <span className="font-bold text-gray-900">PinPinCloud | FREE</span>
               </div>
 
               {/* Welcome text */}
@@ -122,9 +124,11 @@ export default function Index() {
 
               {/* User avatar */}
               <div className="flex justify-center mb-8">
-                <div className="w-16 h-16 bg-gradient-to-br from-blue-900 to-blue-700 rounded-full flex items-center justify-center text-white text-2xl font-bold">
-                  👤
-                </div>
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets%2F91e2732f1c03487e879c66ee97e72712%2F34cbcd9ce9c34f589a07ada075ea2335?format=webp&width=800"
+                  alt="PinPinCloud"
+                  className="w-16 h-16 object-contain"
+                />
               </div>
 
               {/* Form fields */}
@@ -243,7 +247,7 @@ export default function Index() {
       {/* Footer */}
       <footer className="relative z-10 border-t border-white/10 py-8 px-6">
         <div className="max-w-6xl mx-auto text-center text-white/60 text-sm">
-          <p>&copy; 2024 Studio. All rights reserved.</p>
+          <p>&copy; 2024 PinPinCloud | FREE. All rights reserved.</p>
         </div>
       </footer>
     </div>
