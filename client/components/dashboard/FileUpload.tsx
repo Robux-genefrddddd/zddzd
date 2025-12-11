@@ -102,7 +102,7 @@ export function FileUpload({ onFileSelected, uploading, theme }: FileUploadProps
               color: theme === "dark" ? "#9CA3AF" : "#6B7280",
             }}
           >
-            PNG, JPG, PDF or any file up to 100MB
+            Any file type • Maximum 100MB • Secure cloud storage
           </p>
         </div>
 
