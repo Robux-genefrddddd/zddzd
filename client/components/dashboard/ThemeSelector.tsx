@@ -1,4 +1,5 @@
 import { Moon, Sun, Palette, Zap, Leaf, Sparkles } from "lucide-react";
+import { getThemeColors } from "@/lib/theme-colors";
 
 interface ThemeSelectorProps {
   theme: string;
@@ -11,60 +12,69 @@ const themes = [
     name: "Dark Mode",
     icon: Moon,
     description: "Professional dark theme for night viewing",
+    colorPreview: "#0E0E0F",
   },
   {
     id: "light",
     name: "Light Mode",
     icon: Sun,
     description: "Soft light theme with pastel tones",
+    colorPreview: "#FFFFFF",
   },
   {
     id: "blue",
     name: "Ocean Blue",
     icon: Palette,
     description: "Cool blue accent theme",
+    colorPreview: "#0F172A",
   },
   {
     id: "purple",
     name: "Purple Dream",
     icon: Sparkles,
     description: "Modern purple accent theme",
+    colorPreview: "#0F0B1D",
   },
   {
     id: "green",
     name: "Forest Green",
     icon: Leaf,
     description: "Nature-inspired green theme",
+    colorPreview: "#051512",
   },
   {
     id: "amber",
     name: "Warm Amber",
     icon: Zap,
     description: "Warm and energetic theme",
+    colorPreview: "#1B1410",
   },
 ];
 
 export function ThemeSelector({ theme, onThemeChange }: ThemeSelectorProps) {
+  const colors = getThemeColors(theme);
+
   return (
     <div className="space-y-6">
       <div
         className="rounded-lg border p-6"
         style={{
-          backgroundColor: theme === "dark" ? "#111214" : "#F9FAFB",
-          borderColor: theme === "dark" ? "#1F2124" : "#E5E7EB",
+          backgroundColor: colors.card,
+          borderColor: colors.border,
         }}
       >
         <h3
           className="text-lg font-bold mb-6"
-          style={{ color: theme === "dark" ? "#FFFFFF" : "#111827" }}
+          style={{ color: colors.text }}
         >
           Customize Your Theme
         </h3>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {themes.map((t) => {
             const Icon = t.icon;
             const isActive = theme === t.id;
+            const themeColors = getThemeColors(t.id);
 
             return (
               <button
@@ -72,12 +82,10 @@ export function ThemeSelector({ theme, onThemeChange }: ThemeSelectorProps) {
                 onClick={() => onThemeChange(t.id)}
                 className="p-6 rounded-lg border-2 transition-all text-left hover:opacity-80"
                 style={{
-                  backgroundColor: theme === "dark" ? "#141518" : "#FFFFFF",
+                  backgroundColor: colors.card,
                   borderColor: isActive
-                    ? "#3B82F6"
-                    : theme === "dark"
-                      ? "#1F2124"
-                      : "#E5E7EB",
+                    ? colors.primary
+                    : colors.border,
                 }}
               >
                 <div className="flex items-start justify-between mb-3">
@@ -85,18 +93,16 @@ export function ThemeSelector({ theme, onThemeChange }: ThemeSelectorProps) {
                     className="w-6 h-6"
                     style={{
                       color: isActive
-                        ? "#3B82F6"
-                        : theme === "dark"
-                          ? "#9CA3AF"
-                          : "#6B7280",
+                        ? colors.primary
+                        : colors.textSecondary,
                     }}
                   />
                   {isActive && (
                     <span
                       className="text-xs font-semibold px-2 py-1 rounded"
                       style={{
-                        backgroundColor: "rgba(59, 130, 246, 0.1)",
-                        color: "#3B82F6",
+                        backgroundColor: colors.accentLight,
+                        color: colors.primary,
                       }}
                     >
                       Active
@@ -104,15 +110,23 @@ export function ThemeSelector({ theme, onThemeChange }: ThemeSelectorProps) {
                   )}
                 </div>
 
+                {/* Color Preview */}
+                <div className="w-full h-12 rounded-md mb-3 border"
+                  style={{
+                    backgroundColor: t.colorPreview,
+                    borderColor: colors.border,
+                  }}
+                ></div>
+
                 <p
                   className="font-medium"
-                  style={{ color: theme === "dark" ? "#FFFFFF" : "#111827" }}
+                  style={{ color: colors.text }}
                 >
                   {t.name}
                 </p>
                 <p
                   className="text-sm mt-2"
-                  style={{ color: theme === "dark" ? "#9CA3AF" : "#6B7280" }}
+                  style={{ color: colors.textSecondary }}
                 >
                   {t.description}
                 </p>
