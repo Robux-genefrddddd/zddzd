@@ -2,6 +2,7 @@ import { Share2, Trash2, Download, Lock } from "lucide-react";
 import { useState } from "react";
 import { storage } from "@/lib/firebase";
 import { ref, getBytes } from "firebase/storage";
+import { getThemeColors } from "@/lib/theme-colors";
 
 interface FileItem {
   id: string;
@@ -30,6 +31,7 @@ export function FilesList({
   onDelete,
   onCopyShareLink,
 }: FilesListProps) {
+  const colors = getThemeColors(theme);
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [downloadingId, setDownloadingId] = useState<string | null>(null);
 
@@ -70,19 +72,19 @@ export function FilesList({
     <div
       className="rounded-lg border overflow-hidden"
       style={{
-        backgroundColor: theme === "dark" ? "#111214" : "#FFFFFF",
-        borderColor: theme === "dark" ? "#1F2124" : "#E5E7EB",
+        backgroundColor: colors.card,
+        borderColor: colors.border,
       }}
     >
       <div
         className="px-6 py-4 border-b"
         style={{
-          borderColor: theme === "dark" ? "#1F2124" : "#E5E7EB",
+          borderColor: colors.border,
         }}
       >
         <h2
           className="text-xl font-bold"
-          style={{ color: theme === "dark" ? "#FFFFFF" : "#111827" }}
+          style={{ color: colors.text }}
         >
           My Files {files.length > 0 && `(${files.length})`}
         </h2>
@@ -91,14 +93,14 @@ export function FilesList({
       <div
         className="divide-y"
         style={{
-          borderColor: theme === "dark" ? "#1F2124" : "#E5E7EB",
+          borderColor: colors.border,
         }}
       >
         {loading ? (
           <div className="px-6 py-8 text-center">
             <p
               style={{
-                color: theme === "dark" ? "#9CA3AF" : "#6B7280",
+                color: colors.textSecondary,
               }}
             >
               Loading files...
@@ -108,7 +110,7 @@ export function FilesList({
           <div className="px-6 py-8 text-center">
             <p
               style={{
-                color: theme === "dark" ? "#9CA3AF" : "#6B7280",
+                color: colors.textSecondary,
               }}
             >
               No files yet. Upload one to get started!
@@ -120,14 +122,14 @@ export function FilesList({
               key={file.id}
               className="px-6 py-4 flex items-center justify-between hover:opacity-75 transition-opacity"
               style={{
-                backgroundColor: theme === "dark" ? "transparent" : "#F9FAFB",
+                backgroundColor: colors.card,
               }}
             >
               <div className="flex-1 min-w-0">
                 <p
                   className="font-medium truncate"
                   style={{
-                    color: theme === "dark" ? "#FFFFFF" : "#111827",
+                    color: colors.text,
                   }}
                   title={file.name}
                 >
@@ -137,7 +139,7 @@ export function FilesList({
                   <p
                     className="text-sm"
                     style={{
-                      color: theme === "dark" ? "#9CA3AF" : "#6B7280",
+                      color: colors.textSecondary,
                     }}
                   >
                     {file.size} • {file.uploadedAt}
@@ -146,9 +148,8 @@ export function FilesList({
                     <span
                       className="px-2 py-1 rounded text-xs font-medium flex items-center gap-1"
                       style={{
-                        backgroundColor:
-                          theme === "dark" ? "rgba(59, 130, 246, 0.1)" : "#DBEAFE",
-                        color: theme === "dark" ? "#60A5FA" : "#1E40AF",
+                        backgroundColor: colors.accentLight,
+                        color: colors.primary,
                       }}
                     >
                       <Lock className="w-3 h-3" />
@@ -171,9 +172,9 @@ export function FilesList({
                   {downloadingId === file.id ? (
                     <div className="w-4 h-4 border-2 border-transparent rounded-full animate-spin"
                       style={{
-                        borderTopColor: theme === "dark" ? "#60A5FA" : "#3B82F6",
-                        borderRightColor: theme === "dark" ? "#60A5FA" : "#3B82F6",
-                      }}
+                    borderTopColor: colors.primary,
+                    borderRightColor: colors.primary,
+                  }}
                     ></div>
                   ) : (
                     <Download className="w-4 h-4" />
@@ -185,7 +186,7 @@ export function FilesList({
                     className="p-2 rounded hover:opacity-60 transition-opacity"
                     title="Share file"
                     style={{
-                      color: theme === "dark" ? "#9CA3AF" : "#6B7280",
+                      color: colors.textSecondary,
                     }}
                   >
                     <Share2 className="w-4 h-4" />
@@ -196,7 +197,7 @@ export function FilesList({
                     className="p-2 rounded transition-opacity"
                     title="Copy share link"
                     style={{
-                      color: theme === "dark" ? "#60A5FA" : "#3B82F6",
+                      color: colors.primary,
                     }}
                   >
                     {copiedId === file.id ? "✓" : <Share2 className="w-4 h-4" />}
