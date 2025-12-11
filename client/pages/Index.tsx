@@ -159,10 +159,10 @@ export default function Index() {
       <style>{`
         @keyframes sheenDiagonal {
           0% {
-            left: -20%;
+            left: -10%;
           }
           100% {
-            left: 120%;
+            left: 110%;
           }
         }
 
@@ -175,13 +175,13 @@ export default function Index() {
           content: '';
           position: absolute;
           top: 0;
-          left: -20%;
-          width: 20%;
+          left: -10%;
+          width: 8%;
           height: 100%;
           background: linear-gradient(
             90deg,
             transparent,
-            rgba(255, 255, 255, 0.4),
+            rgba(255, 255, 255, 0.25),
             transparent
           );
           animation: sheenDiagonal 2.5s infinite;
